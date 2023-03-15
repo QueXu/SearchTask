@@ -1,6 +1,5 @@
 # README
 
-SearchTask
 SearchTask is a web application built with Ruby on Rails that allows to search for programming languages by name, type, or designer. The search results are displayed in a table and can be filtered by relevance.
 
 Installation
