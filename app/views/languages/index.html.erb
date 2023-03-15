@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html style="border-color:white; border-width:70px; border-style:solid;">
+  <head>
+    <title>Programming Languages Search</title>
+  </head>
+  <body>
+    <div class="col-md-6 text-center mx-auto">
+    <h1>Programming Languages Search</h1>
+      <div class="row">
+        <div class="col-md-9">
+          <input class="form-control" id="search_field" placeholder="Search for programming language...">
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-secondary" onclick="makeApiRequest()">Search</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <%= render partial:"search_results"%>
+  </body>
+</html>
+
+<script>
+  function makeApiRequest() {
+    // The fetch method is used to make request with term from search field
+    fetch(`/?search=${document.getElementById("search_field").value}`, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        // Response is passed to the `insertResult` function
+        response.json().then(data => {
+          insertResult(data);
+        })
+      })
+      .catch(error => console.error(error));
+  }
+
+  // This function inserts the search results into an HTML table
+  function insertResult(data) {
+    // The `table` variable references an HTML table element by ID
+    let table = document.getElementById("results")
+    // Clearing table content
+    table.innerHTML = ""
+    // Adding each search result to the table
+    data.forEach(language => {
+      table.innerHTML += `
+      <tr>
+          <td>${language["Name"]}</td>
+          <td>${language["Type"]}</td>
+          <td>${language["Designed by"]}</td>
+        </tr>`  
+    });
+  }
+</script>

@@ -1,0 +1,18 @@
+<table class="table table-light", id="search-results", style="border-color:B7B7B7; border-width:10px; border-style:solid;">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Designed by</th>
+    </tr>
+  </thead>
+  <tbody id="results">
+    <% @languages.each do |language| %>
+      <tr>
+        <td><%= language["Name"] %></td>
+        <td><%= language["Type"] %></td>
+        <td><%= language["Designed by"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
